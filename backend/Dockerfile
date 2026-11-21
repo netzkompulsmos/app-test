@@ -11,6 +11,9 @@ RUN apk add --no-cache \
     dos2unix \
     && docker-php-ext-install pdo pdo_mysql
 
+# Configure PHP upload limits (50MB)
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Install Composer from official image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 

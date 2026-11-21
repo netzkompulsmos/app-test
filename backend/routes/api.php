@@ -49,7 +49,7 @@ Route::get('/images', function () {
 // Upload a new image
 Route::post('/images', function (Request $request) {
     $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:10240',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp,svg|max:51200',
         'title' => 'required|string|max:255',
         'author' => 'nullable|string|max:100',
     ]);
