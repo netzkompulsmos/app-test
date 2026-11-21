@@ -12,6 +12,10 @@ fi
 # Ensure app key exists
 php artisan key:generate --force || true
 
+# Ensure uploads directory exists and is writable
+mkdir -p public/uploads
+chmod -R 777 public/uploads storage bootstrap/cache
+
 # Wait for database using Laravel's own database configuration
 echo "Waiting for MariaDB connection..."
 max_retries=30
@@ -28,12 +32,9 @@ else
     echo "MariaDB connection established successfully!"
 fi
 
-# Run database migrations and seeds
+# Run database migrations
 echo "Running migrations..."
 php artisan migrate --force || true
-
-echo "Running seeders..."
-php artisan db:seed --force || true
 
 echo "Starting Laravel server on 0.0.0.0:8000..."
 exec php artisan serve --host=0.0.0.0 --port=8000
